@@ -43,16 +43,20 @@ public class Vector2dTest {
         Vector2d v2 = new Vector2d(1, 2);
         Vector2d v3 = new Vector2d(1, -3);
         Vector2d v4 = new Vector2d(5, 2);
+        Vector2d v5 = new Vector2d(5, 3);
+        Vector2d v6 = new Vector2d(6, -3);
 
         assertTrue(v1.precedes(v2));
         assertTrue(v2.precedes(v1));
         assertTrue(v1.precedes(v4));
         assertTrue(v3.precedes(v2));
-        assertTrue(v3.precedes(v4));
+        assertTrue(v1.precedes(v5));
+
 
         assertFalse(v4.precedes(v1));
-        assertFalse(v4.precedes(v1));
+        assertFalse(v4.precedes(v2));
         assertFalse(v2.precedes(v3));
+        assertFalse(v1.precedes(v6));
     }
 
     @Test
@@ -61,15 +65,20 @@ public class Vector2dTest {
         Vector2d v2 = new Vector2d(1, 2);
         Vector2d v3 = new Vector2d(1, -3);
         Vector2d v4 = new Vector2d(5, 2);
+        Vector2d v5 = new Vector2d(5, 3);
+        Vector2d v6 = new Vector2d(6, -3);
 
         assertTrue(v1.follows(v2));
         assertTrue(v2.follows(v1));
         assertTrue(v4.follows(v1));
         assertTrue(v2.follows(v3));
+        assertTrue(v5.follows(v1));
 
         assertFalse(v3.follows(v2));
         assertFalse(v3.follows(v4));
         assertFalse(v1.follows(v4));
+        assertFalse(v1.follows(v5));
+        assertFalse(v6.follows(v1));
     }
 
     @Test
