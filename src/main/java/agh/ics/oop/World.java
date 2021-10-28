@@ -111,8 +111,8 @@ public class World {
         }
     }
 
-    public static void run(Direction.direction[] tab){
-        for (Direction.direction d : tab){
+    public static void run(Direction[] tab){
+        for (Direction d : tab){
             switch (d) {
                 case FORWARD -> out.println("zwierzak idzie do przodu");
                 case BACKWARD -> out.println("zwierzak idzie do tyłu");
@@ -124,16 +124,16 @@ public class World {
 
     }
 
-    public static Direction.direction[] change(String[] args){
+    public static Direction[] change(String[] args){
         int l = args.length;
-        Direction.direction[] dir = new Direction.direction[l];
+        Direction[] dir = new Direction[l];
 
         for (int i = 0; i < l; i++){
             switch (args[i]) {
-                case "f" -> dir[i] = Direction.direction.FORWARD;
-                case "b" -> dir[i] = Direction.direction.BACKWARD;
-                case "r" -> dir[i] = Direction.direction.RIGHT;
-                case "l" -> dir[i] = Direction.direction.LEFT;
+                case "f" -> dir[i] = Direction.FORWARD;
+                case "b" -> dir[i] = Direction.BACKWARD;
+                case "r" -> dir[i] = Direction.RIGHT;
+                case "l" -> dir[i] = Direction.LEFT;
             }
         }
         return dir;
@@ -142,13 +142,8 @@ public class World {
     public static void main(String[] args) {
         out.println("system wystartowal");
 
-
-        Direction.direction[] dir = change(args);
+        Direction[] dir = change(args);
         run(dir);
-
-
-        out.println(MapDirection.EAST.toString());
-
 
         out.print("system zakonczyl dzialanie");
     }
