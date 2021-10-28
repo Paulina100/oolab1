@@ -1,10 +1,8 @@
 package agh.ics.oop;
 
-import agh.ics.oop.World.*;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Vector2dTest {
 
@@ -15,15 +13,14 @@ public class Vector2dTest {
         Vector2d v3 = new Vector2d(1, -3);
         Vector2d v4 = new Vector2d(5, 2);
 
-        assertTrue(v1.equals(v1));
-        assertTrue(v1.equals(v2));
-        assertTrue(v2.equals(v1));
+        assertEquals(v1, v2);
+        assertEquals(v2, v1);
 
-        assertFalse(v1.equals(v3));
-        assertFalse(v2.equals(v3));
-        assertFalse(v2.equals(v4));
-        assertFalse(v1.equals("kot"));
-        assertFalse(v1.equals(10));
+        assertNotEquals(v1, v3);
+        assertNotEquals(v2, v3);
+        assertNotEquals(v2, v4);
+        assertNotEquals("kot", v1);
+        assertNotEquals(10, v1);
     }
 
     @Test
