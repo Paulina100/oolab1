@@ -1,8 +1,9 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Vector2dTest {
 
@@ -13,14 +14,14 @@ public class Vector2dTest {
         Vector2d v3 = new Vector2d(1, -3);
         Vector2d v4 = new Vector2d(5, 2);
 
-        assertEquals(v1, v2);
-        assertEquals(v2, v1);
+        assertTrue(v1.equals(v2));
+        assertTrue(v2.equals(v1));
 
-        assertNotEquals(v1, v3);
-        assertNotEquals(v2, v3);
-        assertNotEquals(v2, v4);
-        assertNotEquals("kot", v1);
-        assertNotEquals(10, v1);
+        assertFalse(v1.equals(v3));
+        assertFalse(v2.equals(v3));
+        assertFalse(v2.equals(v4));
+        assertFalse(v1.equals("kot"));
+        assertFalse(v1.equals(10));
     }
 
     @Test
@@ -80,7 +81,6 @@ public class Vector2dTest {
         Vector2d v5 = new Vector2d(-3, -2);
         Vector2d v6 = new Vector2d(5, 10);
 
-        assertEquals(v1.upperRight(v1), v1);
         assertEquals(v1.upperRight(v2), new Vector2d(1, 2));
         assertEquals(v1.upperRight(v3), new Vector2d(1, 2));
         assertEquals(v3.upperRight(v1), new Vector2d(1, 2));
@@ -98,7 +98,6 @@ public class Vector2dTest {
         Vector2d v5 = new Vector2d(-3, -2);
         Vector2d v6 = new Vector2d(5, 10);
 
-        assertEquals(v1.lowerLeft(v1), v1);
         assertEquals(v1.lowerLeft(v2), new Vector2d(1, 2));
         assertEquals(v1.lowerLeft(v3), new Vector2d(1, -3));
         assertEquals(v3.lowerLeft(v1), new Vector2d(1, -3));
@@ -116,7 +115,6 @@ public class Vector2dTest {
         Vector2d v5 = new Vector2d(-3, -2);
         Vector2d v6 = new Vector2d(5, 10);
 
-        assertEquals(v1.add(v1), new Vector2d(2, 4));
         assertEquals(v1.add(v2), new Vector2d(2, 4));
         assertEquals(v1.add(v3), new Vector2d(2, -1));
         assertEquals(v1.add(v4), new Vector2d(6, 4));
@@ -133,7 +131,6 @@ public class Vector2dTest {
         Vector2d v5 = new Vector2d(-3, -2);
         Vector2d v6 = new Vector2d(5, 10);
 
-        assertEquals(v1.subtract(v1), new Vector2d(0, 0));
         assertEquals(v1.subtract(v2), new Vector2d(0, 0));
         assertEquals(v1.subtract(v3), new Vector2d(0, 5));
         assertEquals(v1.subtract(v4), new Vector2d(-4, 0));
