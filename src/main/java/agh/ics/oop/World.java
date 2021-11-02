@@ -10,6 +10,7 @@ public class World {
                 case BACKWARD -> out.println("zwierzak idzie do tyłu");
                 case RIGHT -> out.println("zwierzak skręca w prawo");
                 case LEFT -> out.println("zwierzak skręca w lewo");
+                default -> out.print("");
             }
         }
 
@@ -21,22 +22,32 @@ public class World {
         Direction[] dir = new Direction[l];
 
         for (int i = 0; i < l; i++){
-            switch (args[i]) {
-                case "f" -> dir[i] = Direction.FORWARD;
-                case "b" -> dir[i] = Direction.BACKWARD;
-                case "r" -> dir[i] = Direction.RIGHT;
-                case "l" -> dir[i] = Direction.LEFT;
-            }
+            dir[i] = switch (args[i]) {
+                case "f" -> Direction.FORWARD;
+                case "b" -> Direction.BACKWARD;
+                case "r" -> Direction.RIGHT;
+                case "l" -> Direction.LEFT;
+                default -> Direction.NONE;
+            };
         }
         return dir;
     }
 
     public static void main(String[] args) {
-        out.println("system wystartowal");
+//        out.println("system wystartowal");
+//
+//        Direction[] dir = change(args);
+//        run(dir);
+//        out.print("system zakonczyl dzialanie");
 
-        Direction[] dir = change(args);
-        run(dir);
+        Animal cat = new Animal();
+        out.println(cat);
 
-        out.print("system zakonczyl dzialanie");
+        MoveDirection[] dir = OptionsParser.parse(args);
+
+        for (MoveDirection i : dir){
+            cat.move(i);
+            out.println(cat);
+        }
     }
 }
