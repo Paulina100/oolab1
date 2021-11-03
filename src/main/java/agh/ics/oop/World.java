@@ -40,7 +40,7 @@ public class World {
 //        run(dir);
 //        out.print("system zakonczyl dzialanie");
 
-        Animal cat = new Animal();
+        /*Animal cat = new Animal();
         out.println(cat);
 
         MoveDirection[] dir = OptionsParser.parse(args);
@@ -48,6 +48,16 @@ public class World {
         for (MoveDirection i : dir){
             cat.move(i);
             out.println(cat);
-        }
+        }*/
+
+
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine enegine = new SimulationEngine(directions, map, positions);
+        enegine.run();
+
+
     }
 }
+
