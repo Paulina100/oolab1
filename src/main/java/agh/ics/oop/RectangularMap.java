@@ -7,8 +7,12 @@ import java.util.List;
 public class RectangularMap implements IWorldMap {
     public final int width;
     public final int height;
+    private final List<Animal> animals = new ArrayList<>();
 
-    List<Animal> animals = new ArrayList<>();
+
+    public List<Animal> getAnimals(){
+        return animals;
+    }
 
 
     public RectangularMap(int width, int height){
