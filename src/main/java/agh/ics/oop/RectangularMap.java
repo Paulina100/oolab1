@@ -10,11 +10,6 @@ public class RectangularMap implements IWorldMap {
     private final List<Animal> animals = new ArrayList<>();
 
 
-    public List<Animal> getAnimals(){
-        return animals;
-    }
-
-
     public RectangularMap(int width, int height){
         this.width = width;
         this.height = height;

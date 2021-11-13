@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+/*
 public class GrassField implements IWorldMap {
     int grassAmount;
 
@@ -12,4 +13,4 @@ public class GrassField implements IWorldMap {
     }
 
 
-}
+}*/
