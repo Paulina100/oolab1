@@ -1,68 +1,46 @@
 package agh.ics.oop;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class RectangularMap implements IWorldMap {
-    public final int width;
-    public final int height;
-    private final List<Animal> animals = new ArrayList<>();
-
+public class RectangularMap extends AbstractWorldMap {
 
     public RectangularMap(int width, int height){
-        this.width = width;
-        this.height = height;
+        this.boundaries[0] = new Vector2d(0, 0);
+        this.boundaries[1] = new Vector2d(width, height);
     }
 
+    private boolean isOnMap(Vector2d position){
+        return position.follows(this.boundaries[0]) && position.precedes(this.boundaries[1]);
+    }
 
     @Override
     public Object objectAt(Vector2d position) {
-        for (Animal animal : animals){
-            if (animal.isAt(position)) return animal;
-        }
-        return null;
-    }
+        if (!isOnMap(position)) return null;
 
+        return super.objectAt(position);
+    }
 
     @Override
-    public boolean isOccupied(Vector2d position) {
-
-        for (Animal animal : animals) {
-            if (animal.isAt(position)) return true;
-        }
-        return false;
+    public boolean isOccupied(Vector2d position){
+        if (!isOnMap(position)) return true;
+        return super.isOccupied(position);
     }
-
 
     @Override
     public boolean place(Animal animal) {
+        if (!isOnMap(animal.getPosition())) return false;
 
-        Vector2d position = animal.getPosition();
-
-        if (isOccupied(position)) return false;
-
-        animals.add(animal);
-        return true;
+        return super.place(animal);
     }
-
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        Vector2d boundary_start = new Vector2d(0, 0);
-        Vector2d boundary_end = new Vector2d(width, height);
-        if (position.follows(boundary_start) && position.precedes(boundary_end)){
-            return !isOccupied(position);
-        }
-        return false;
-    }
+        if (!isOnMap(position)) return false;
 
+        return super.canMoveTo(position);
+    }
 
     public String toString(){
         MapVisualizer mapvis = new MapVisualizer(this);
-        Vector2d boundary_start = new Vector2d(0, 0);
-        Vector2d boundary_end = new Vector2d(width, height);
 
-        return mapvis.draw(boundary_start, boundary_end);
+        return mapvis.draw(boundaries[0], boundaries[1]);
     }
 }

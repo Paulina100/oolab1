@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-// import static java.lang.System.out;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +25,16 @@ public class SimulationEngine implements IEngine {
 
 
     public void run(){
-        // out.println(map.toString());
-        int l = directions.length;
+        out.println(map.toString());
         int i = 0;
-        while (i < l) {
+        while (i < directions.length) {
             for (Animal animal : animals) {
                 animal.move(directions[i]);
 
-                /*out.println(directions[i].toString());
-                out.println(map);*/
+                out.println(directions[i].toString());
+                out.println(map);
                 i++;
-                if (i >= l) break;
+                if (i >= directions.length) break;
             }
         }
     }
