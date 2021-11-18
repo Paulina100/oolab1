@@ -5,7 +5,6 @@ import java.util.List;
 
 abstract class AbstractWorldMap implements IWorldMap {
     protected List<Animal> animals = new ArrayList<>();
-    protected Vector2d[] boundaries = new Vector2d[2];
 
     public Object objectAt(Vector2d position) {
         for (Animal animal : animals){
@@ -31,9 +30,13 @@ abstract class AbstractWorldMap implements IWorldMap {
         return !(objectAt(position) instanceof Animal);
     }
 
+    protected abstract Vector2d[] find_boundaries();
+
     public String toString(){
         MapVisualizer mapvis = new MapVisualizer(this);
 
+        Vector2d[] boundaries = find_boundaries();
         return mapvis.draw(boundaries[0], boundaries[1]);
     }
+
 }

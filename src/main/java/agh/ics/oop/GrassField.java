@@ -44,14 +44,9 @@ public class GrassField extends AbstractWorldMap {
         return null;
     }
 
-    public String toString(){
-        MapVisualizer mapvis = new MapVisualizer(this);
 
-        find_boundaries();
-        return mapvis.draw(boundaries[0], boundaries[1]);
-    }
-
-    private void find_boundaries(){
+    protected Vector2d[] find_boundaries(){
+        Vector2d[] boundaries = {animals.get(0).getPosition(), animals.get(0).getPosition()};
 
         for (Animal animal : animals){
             boundaries[0] = boundaries[0].lowerLeft(animal.getPosition());
@@ -62,5 +57,6 @@ public class GrassField extends AbstractWorldMap {
             boundaries[1] = boundaries[1].upperRight(grass.getPosition());
         }
 
+        return boundaries;
     }
 }

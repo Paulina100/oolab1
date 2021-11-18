@@ -12,7 +12,6 @@ public class RectangularMapTest {
 
     Vector2d posCat = new Vector2d(2,2);
     Vector2d posDog = new Vector2d(3,4);
-    Vector2d[] positions = { posCat, posDog };
 
 
     Vector2d outsideMap1 = new Vector2d(6,2);
@@ -55,8 +54,8 @@ public class RectangularMapTest {
     public void isOccupiedTest(){
         assertTrue(map.isOccupied(posCat));
         assertTrue(map.isOccupied(posDog));
-        assertTrue(map.isOccupied(outsideMap1));
-        assertTrue(map.isOccupied(outsideMap2));
+        assertFalse(map.isOccupied(outsideMap1));
+        assertFalse(map.isOccupied(outsideMap2));
 
         assertFalse(map.isOccupied(onMap1));
         assertFalse(map.isOccupied(onMap2));
