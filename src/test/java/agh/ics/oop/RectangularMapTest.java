@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class RectangularMapTest {
-    IWorldMap map = new RectangularMap(5, 5);
+    AbstractWorldMap map = new RectangularMap(5, 5);
 
     Vector2d posCat = new Vector2d(2,2);
     Vector2d posDog = new Vector2d(3,4);

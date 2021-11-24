@@ -1,16 +1,16 @@
 package agh.ics.oop;
 
 public class RectangularMap extends AbstractWorldMap {
-    private final static Vector2d boundary_start = new Vector2d(0, 0);
-    private final Vector2d boundary_end;
+    private final static Vector2d boundaryStart = new Vector2d(0, 0);
+    private final Vector2d boundaryEnd;
 
     public RectangularMap(int width, int height){
 
-        this.boundary_end = new Vector2d(width, height);
+        this.boundaryEnd = new Vector2d(width, height);
     }
 
     private boolean isOnMap(Vector2d position){
-        return position.follows(boundary_start) && position.precedes(boundary_end);
+        return position.follows(boundaryStart) && position.precedes(boundaryEnd);
     }
 
 
@@ -30,7 +30,7 @@ public class RectangularMap extends AbstractWorldMap {
 
     @Override
     protected Vector2d[] find_boundaries() {
-        return new Vector2d[]{boundary_start, boundary_end};
+        return new Vector2d[]{boundaryStart, boundaryEnd};
     }
 
 

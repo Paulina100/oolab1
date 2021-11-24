@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class SimulationEngineTest {
     @Test
     public void runTest(){
-        IWorldMap map = new RectangularMap(10, 5);
+        AbstractWorldMap map = new RectangularMap(10, 5);
 
         Vector2d posCat1 = new Vector2d(2,2);
         Vector2d posDog1 = new Vector2d(3,4);

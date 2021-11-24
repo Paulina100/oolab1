@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GrassFieldTest {
-    IWorldMap map = new GrassField(10);
+    AbstractWorldMap map = new GrassField(10);
 
     Vector2d posCat = new Vector2d(2,2);
     Vector2d posDog = new Vector2d(3,4);
-    Vector2d[] positions = { posCat, posDog };
+
 
     Vector2d posRand1 = new Vector2d(-3, -2);
     Vector2d posRand2 = new Vector2d(20, 4);
