@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GrassFieldTest {
-    AbstractWorldMap map = new GrassField(10);
+    IWorldMap map = new GrassField(10);
 
     Vector2d posCat = new Vector2d(2,2);
     Vector2d posDog = new Vector2d(3,4);
@@ -25,8 +25,12 @@ public class GrassFieldTest {
     public void placeAnimal(){
         assertTrue(x);
         assertTrue(y);
-        assertFalse(map.place(new Animal(map, posCat)));
-        assertFalse(map.place(new Animal(map, posDog)));
+
+        try{
+            map.place(new Animal(map, posCat));
+        } catch (IllegalArgumentException ex2) {
+            assertEquals(ex2.getMessage(), posCat + " is already occupied");
+        }
     }
 
     @Test

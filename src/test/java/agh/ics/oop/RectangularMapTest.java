@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class RectangularMapTest {
-    AbstractWorldMap map = new RectangularMap(5, 5);
+    IWorldMap map = new RectangularMap(5, 5);
 
     Vector2d posCat = new Vector2d(2,2);
     Vector2d posDog = new Vector2d(3,4);
@@ -30,11 +30,17 @@ public class RectangularMapTest {
 
         assertTrue(x);
         assertTrue(y);
-        assertFalse(map.place(new Animal(map, posCat)));
-        assertFalse(map.place(new Animal(map, posDog)));
 
-        assertFalse(map.place(new Animal(map, outsideMap1)));
-        assertFalse(map.place(new Animal(map, outsideMap2)));
+        try{
+            map.place(new Animal(map, outsideMap1));
+        } catch (IllegalArgumentException ex) {
+            assertEquals(ex.getMessage(), outsideMap1 + " is not on map");
+        }
+        try{
+            map.place(new Animal(map, posCat));
+        } catch (IllegalArgumentException ex2) {
+            assertEquals(ex2.getMessage(), posCat + " is already occupied");
+        }
 
     }
 

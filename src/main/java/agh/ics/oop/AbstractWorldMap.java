@@ -18,9 +18,12 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     public boolean place(Animal animal) {
         Vector2d position = animal.getPosition();
 
-        if (objectAt(position) instanceof Animal) return false;
+        if (objectAt(position) instanceof Animal) {
+            throw new IllegalArgumentException(animal.getPosition() + " is already occupied");
+        }
 
         animals.put(position, animal);
+        animal.addObserver(this);
         return true;
     }
 
@@ -28,19 +31,21 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
         return !(objectAt(position) instanceof Animal);
     }
 
-    protected abstract Vector2d[] find_boundaries();
-
-    public String toString(){
-        MapVisualizer mapvis = new MapVisualizer(this);
-
-        Vector2d[] boundaries = find_boundaries();
-        return mapvis.draw(boundaries[0], boundaries[1]);
-    }
-
 
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         Animal animal = animals.remove(oldPosition);
         animals.put(newPosition, animal);
+    }
+
+
+    protected abstract Vector2d[] findBoundaries();
+
+
+    public String toString(){
+        MapVisualizer mapvis = new MapVisualizer(this);
+
+        Vector2d[] boundaries = findBoundaries();
+        return mapvis.draw(boundaries[0], boundaries[1]);
     }
 
 }

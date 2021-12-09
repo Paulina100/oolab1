@@ -9,9 +9,11 @@ import static java.lang.Math.sqrt;
 public class GrassField extends AbstractWorldMap {
     private final int grassAmount;
     protected Map<Vector2d, Grass> grassMap = new HashMap<>();
+    private final MapBoundary boundary;
 
     public GrassField(int grassAmount){
         this.grassAmount = grassAmount;
+        this.boundary = new MapBoundary(this);
         this.initiate_map();
     }
 
@@ -26,10 +28,17 @@ public class GrassField extends AbstractWorldMap {
 
             if (! isOccupied(position)){
                 this.grassMap.put(position, new Grass(position));
+                boundary.addPosition(position);
                 i += 1;
             }
-
         }
+    }
+
+    @Override
+    public boolean place(Animal animal) {
+        super.place(animal);
+        boundary.addPosition(animal.getPosition());
+        return true;
     }
 
     @Override
@@ -41,18 +50,16 @@ public class GrassField extends AbstractWorldMap {
     }
 
 
-    protected Vector2d[] find_boundaries(){
+    protected Vector2d[] findBoundaries(){
         Vector2d[] boundaries = {(Vector2d) animals.keySet().toArray()[0],(Vector2d) animals.keySet().toArray()[0]};
 
-        for (Vector2d i : animals.keySet()){
-            Animal animal = animals.get(i);
-            boundaries[0] = boundaries[0].lowerLeft(animal.getPosition());
-            boundaries[1] = boundaries[1].upperRight(animal.getPosition());
+        for (Vector2d pos : animals.keySet()){
+            boundaries[0] = boundaries[0].lowerLeft(pos);
+            boundaries[1] = boundaries[1].upperRight(pos);
         }
-        for (Vector2d i : grassMap.keySet()){
-            Grass grass = grassMap.get(i);
-            boundaries[0] = boundaries[0].lowerLeft(grass.getPosition());
-            boundaries[1] = boundaries[1].upperRight(grass.getPosition());
+        for (Vector2d pos : grassMap.keySet()){
+            boundaries[0] = boundaries[0].lowerLeft(pos);
+            boundaries[1] = boundaries[1].upperRight(pos);
         }
 
         return boundaries;

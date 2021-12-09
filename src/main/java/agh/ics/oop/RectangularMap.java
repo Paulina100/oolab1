@@ -16,7 +16,9 @@ public class RectangularMap extends AbstractWorldMap {
 
     @Override
     public boolean place(Animal animal) {
-        if (!isOnMap(animal.getPosition())) return false;
+        if (!isOnMap(animal.getPosition())) {
+            throw new IllegalArgumentException(animal.getPosition() + " is not on map");
+        }
 
         return super.place(animal);
     }
@@ -29,7 +31,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    protected Vector2d[] find_boundaries() {
+    protected Vector2d[] findBoundaries() {
         return new Vector2d[]{boundaryStart, boundaryEnd};
     }
 

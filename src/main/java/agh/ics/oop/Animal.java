@@ -5,34 +5,25 @@ import java.util.List;
 
 public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
-    private Vector2d position = new Vector2d(2, 2);
+    private Vector2d position;
     private final IWorldMap map;
     private final List<IPositionChangeObserver> observers = new ArrayList<>();
 
 
-    public Animal(){
-        this.map = new RectangularMap(4, 4);
-        addObserver((IPositionChangeObserver) map);
+    public Animal (IWorldMap map){
+        this(map, new Vector2d(2, 2));
     }
 
-
-    public Animal (AbstractWorldMap map){
-        this.map = map;
-        addObserver(map);
-    }
-
-
-    public Animal(AbstractWorldMap map, Vector2d initialPosition){
+    public Animal(IWorldMap map, Vector2d initialPosition){
         this.map = map;
         this.position = initialPosition;
-        addObserver(map);
     }
 
-    void addObserver(IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer){
         observers.add(observer);
     }
 
-    void removeObserver(IPositionChangeObserver observer){
+    public void removeObserver(IPositionChangeObserver observer){
         observers.remove(observer);
     }
 
@@ -67,15 +58,17 @@ public class Animal {
             case FORWARD -> {
                 Vector2d newPosition = this.position.add(this.orientation.toUnitVector());
                 if (map.canMoveTo(newPosition)) {
-                    positionChanged(position, newPosition);
+                    Vector2d oldPosition = this.position;
                     this.position = newPosition;
+                    positionChanged(oldPosition, newPosition);
                     }
                 }
             case BACKWARD -> {
                 Vector2d newPosition = this.position.add(this.orientation.toUnitVector().opposite());
                 if (map.canMoveTo(newPosition)) {
-                    positionChanged(position, newPosition);
+                    Vector2d oldPosition = this.position;
                     this.position = newPosition;
+                    positionChanged(oldPosition, newPosition);
                     }
                 }
             }

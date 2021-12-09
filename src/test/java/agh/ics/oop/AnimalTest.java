@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AnimalTest {
-    Animal cat = new Animal();
+    Animal cat = new Animal(new RectangularMap(4, 4));
 
 
     @Test
