@@ -1,38 +1,57 @@
 package agh.ics.oop;
 
-import static java.lang.System.out;
+import agh.ics.oop.gui.App;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationEngine implements IEngine {
-    private final MoveDirection[] directions;
-    private final IWorldMap map;
-    List<Animal> animals = new ArrayList<>();
+import static java.lang.System.out;
 
-    public SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] initialPositions){
+public class SimulationEngine implements IEngine, Runnable {
+    private MoveDirection[] directions;
+    private final IWorldMap map;
+    private final List<Animal> animals = new ArrayList<>();
+
+    public SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] initialPositions, App app){
         this.directions = directions;
         this.map = map;
-        initializeMap(initialPositions);
-    }
-
-
-    private void initializeMap(Vector2d[] initialPositions){
         for (Vector2d position : initialPositions){
             Animal animal = new Animal(map, position);
-            if (map.place(animal)) animals.add(animal);
+            if (map.place(animal)){
+                animal.addObserver(app);
+                animals.add(animal);
+            }
         }
+    }
+
+    public SimulationEngine(IWorldMap map, Vector2d[] initialPositions, App app){
+        this.map = map;
+        for (Vector2d position : initialPositions){
+            Animal animal = new Animal(map, position);
+            if (map.place(animal)){
+                animal.addObserver(app);
+                animals.add(animal);
+            }
+        }
+    }
+
+    public void setDirections(MoveDirection[] directions){
+        this.directions = directions;
     }
 
 
     public void run(){
-        out.println(map.toString());
+        int moveDelay = 300;
         int i = 0;
         while (i < directions.length) {
             for (Animal animal : animals) {
                 animal.move(directions[i]);
 
-                out.println(directions[i].toString());
-                out.println(map);
+                try {
+                    Thread.sleep(moveDelay);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
                 i++;
                 if (i >= directions.length) break;
             }

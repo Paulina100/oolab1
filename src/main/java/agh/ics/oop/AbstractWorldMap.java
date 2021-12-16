@@ -4,7 +4,7 @@ package agh.ics.oop;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected Map<Vector2d, Animal> animals = new HashMap<>();
 
     public Object objectAt(Vector2d position) {
@@ -38,7 +38,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     }
 
 
-    protected abstract Vector2d[] findBoundaries();
+    public abstract Vector2d[] findBoundaries();
 
 
     public String toString(){

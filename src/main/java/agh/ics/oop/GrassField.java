@@ -50,7 +50,7 @@ public class GrassField extends AbstractWorldMap {
     }
 
 
-    protected Vector2d[] findBoundaries(){
+    public Vector2d[] findBoundaries(){
         Vector2d[] boundaries = {(Vector2d) animals.keySet().toArray()[0],(Vector2d) animals.keySet().toArray()[0]};
 
         for (Vector2d pos : animals.keySet()){

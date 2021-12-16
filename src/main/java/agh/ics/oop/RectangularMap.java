@@ -31,7 +31,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    protected Vector2d[] findBoundaries() {
+    public Vector2d[] findBoundaries() {
         return new Vector2d[]{boundaryStart, boundaryEnd};
     }
 
